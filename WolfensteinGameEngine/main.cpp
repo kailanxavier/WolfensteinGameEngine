@@ -136,17 +136,16 @@ void InitD3D(HWND hWnd)
     InitPipeline();
     InitGraphics();
 }
-
 void RenderFrame(void)
 {
-    devcon->ClearRenderTargetView(backbuffer, D3DXCOLOR(0.0f, 0.2f, 0.4f, 1.0f));
+    const float clearColor[4] = { 0.0f, 0.2f, 0.4f, 1.0f };
+    devcon->ClearRenderTargetView(backbuffer, clearColor);
 
-    devcon->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    devcon->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     devcon->Draw(3, 0);
 
     swapchain->Present(0, 0);
 }
-
 void CleanD3D(void)
 {
     swapchain->SetFullscreenState(FALSE, NULL);
@@ -165,9 +164,9 @@ void InitGraphics()
 {
     VERTEX OurVertices[] =
     {
-        { 0.0f, 0.5f, 0.0f, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f) },
-        { 0.45f, -0.5, 0.0f, D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f) },
-        { -0.45f, -0.5f, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) }
+        { 0.0f, 0.5f, 0.0f, XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+        { 0.45f, -0.5, 0.0f, XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
+        { -0.45f, -0.5f, 0.0f, XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) }
     };
 
     D3D11_BUFFER_DESC bd;
