@@ -1,3 +1,8 @@
+cbuffer ConstantBuffer : register(b0)
+{
+    matrix WorldViewProj;
+}
+
 struct VOut
 {
     float4 position : SV_POSITION;
