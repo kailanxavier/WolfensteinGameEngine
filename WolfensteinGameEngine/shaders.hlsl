@@ -12,12 +12,12 @@ struct VOut
 VOut VShader(float4 position : POSITION, float4 color : COLOR)
 {
     VOut output;
-    output.position = position;
+    output.position = mul(position, WorldViewProj);
     output.color = color;
     return output;
 }
 
-float4 PShader(float4 position : SV_POSITION, float4 color : COLOR) : SV_TARGET
+float4 PShader(VOut input) : SV_TARGET
 {
-    return color;
+    return input.color;
 }
